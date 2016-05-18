@@ -6,6 +6,9 @@ using VDS.RDF;
 
 namespace ROOMZ
 {
+	/**
+	 * This class contains sevaral methods that build and execute queries based on parameters.
+	 */
 	public class RemoteSPARQLStore
 	{
 		SPARQLQueryDispatcher queryDispatcher;
@@ -17,6 +20,10 @@ namespace ROOMZ
 
 		/**
 		 * Get all the triples with a specific Uri as Subject.
+		 * 
+		 * @param uri, the uri that will be used as subject in the where clause.
+		 * @param limit, if a result limit should be applied.
+		 * @param limitAmount, the result limit amount.
 		 */
 		public List<SparqlResult> getTriplesBySubject (Uri uri,  bool limit, int limitAmount) 
 		{
@@ -36,6 +43,10 @@ namespace ROOMZ
 
 		/**
 		 * Get all the triples with a specific Uri as Predicate.
+		 * 
+		 * @param uri, the uri that will be used as predicate in the where clause.
+		 * @param limit, if a result limit should be applied.
+		 * @param limitAmount, the result limit amount.
 		 */
 		public List<SparqlResult> getTriplesByPredicate (Uri uri,  bool limit, int limitAmount) 
 		{
@@ -55,6 +66,10 @@ namespace ROOMZ
 
 		/**
 		 * Get all the triples with a specific Uri as Object.
+		 * 
+		 * @param uri, the uri that will be used as object in the where clause.
+		 * @param limit, if a result limit should be applied.
+		 * @param limitAmount, the result limit amount.
 		 */
 		public List<SparqlResult> getTriplesByObject (Uri uri,  bool limit, int limitAmount) 
 		{
@@ -74,6 +89,10 @@ namespace ROOMZ
 
 		/**
 		 * Get all the triples with a specific Uri as Predicate or Object.
+		 * 
+		 * @param uri, the uri that will be used as subject and predicate in the where clauses.
+		 * @param limit, if a result limit should be applied.
+		 * @param limitAmount, the result limit amount.
 		 */
 		public List<SparqlResult> getTriplesBySubjectAndObject(Uri uri,  bool limit, int limitAmount) 
 		{
@@ -83,25 +102,6 @@ namespace ROOMZ
 
 			SparqlParameterizedString queryString = new SparqlParameterizedString();
 			queryString.CommandText = "SELECT * { { SELECT (@uri AS ?subject) ?predicate ?object WHERE { @uri ?predicate ?object } } UNION { SELECT ?subject ?predicate (@uri AS ?object) WHERE { ?subject ?predicate @uri } } } ";
-			queryString.SetUri ("uri", uri);
-
-			if (limit) 
-			{
-				queryString.Append ("LIMIT @limit");
-				queryString.SetLiteral ("limit",  limitAmount);
-			}
-
-			SparqlResultSet result = queryDispatcher.dispatchQuery (queryString.ToString ());
-			return result.Results;
-		}
-			
-		/**
-		 * Get all the predicates that are used with a specific Uri as Subject or Object.
-		 */
-		public List<SparqlResult> getPredicatesBySubject(Uri uri,  bool limit, int limitAmount) 
-		{
-			SparqlParameterizedString queryString = new SparqlParameterizedString();
-			queryString.CommandText = "SELECT ?predicate WHERE { @uri ?predicate ?subject} GROUP BY ?predicate ";
 			queryString.SetUri ("uri", uri);
 
 			if (limit) 
@@ -132,26 +132,7 @@ namespace ROOMZ
 			SparqlResultSet result = queryDispatcher.dispatchQuery (queryString.ToString ());
 			return result.Results;
 		}
-
-		/**
-		 * Get all the predicates that are used with a specific Uri as Subject or Object.
-		 */
-		public List<SparqlResult> getPredicatesBySubjectAndObject (Uri uri,  bool limit, int limitAmount) 
-		{
-			SparqlParameterizedString queryString = new SparqlParameterizedString();
-			queryString.CommandText = "SELECT * { { SELECT ?predicate WHERE { @uri ?predicate ?object } } UNION { SELECT ?predicate WHERE { ?subject ?predicate @uri } } } GROUP BY ?predicate ";
-			queryString.SetUri ("uri", uri);
-
-			if (limit) 
-			{
-				queryString.Append ("LIMIT @limit");
-				queryString.SetLiteral ("limit",  limitAmount);
-			}
-
-			SparqlResultSet result = queryDispatcher.dispatchQuery (queryString.ToString ());
-			return result.Results;
-		}
-
+			
 		/**
 		 * Get all the triples with specific criteria.
 		 * 
@@ -169,7 +150,7 @@ namespace ROOMZ
 		 * @param limitAmount
 		 *   The limit size.
 		 */
-		public List<SparqlResult> getTriplesByCriteria (QueryParameter subjectValue, QueryParameter predicateValue, QueryParameter objectValue, bool limit, int limitAmount) 
+		public List<SparqlResult> getTriplesByCustomCriteria (QueryParameter subjectValue, QueryParameter predicateValue, QueryParameter objectValue, bool limit, int limitAmount) 
 		{
 			SparqlParameterizedString queryString = new SparqlParameterizedString();
 			queryString.CommandText = "SELECT @subjectSelect @predicateSelect @objectSelect WHERE { @subject @predicate @object } ";
@@ -183,7 +164,7 @@ namespace ROOMZ
 				queryString.Append ("LIMIT @limit");
 				queryString.SetLiteral ("limit",  limitAmount);
 			}
-
+				
 			SparqlResultSet result = queryDispatcher.dispatchQuery (queryString.ToString ());
 			return result.Results;
 		}
@@ -229,7 +210,8 @@ namespace ROOMZ
 		 */
 		public List<SparqlResult> getTriplesByCustomQuery (string query) 
 		{
-			return queryDispatcher.dispatchQuery (query);
+			SparqlResultSet result = queryDispatcher.dispatchQuery (query);
+			return result.Results;
 		}
 
 		/**
@@ -237,7 +219,8 @@ namespace ROOMZ
 		 */
 		public List<SparqlResult> updateByCustomQuery (string query)
 		{
-			return queryDispatcher.dispatchUpdate (query);
+			SparqlResultSet result = queryDispatcher.dispatchUpdate (query);
+			return result.Results;
 		}
 	}
 }

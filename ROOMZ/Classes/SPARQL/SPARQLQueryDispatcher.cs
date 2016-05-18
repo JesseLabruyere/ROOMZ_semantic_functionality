@@ -3,6 +3,9 @@ using VDS.RDF.Query;
 
 namespace ROOMZ
 {
+	/**
+	 * This class can execute SPARQL queries on a remote SPARQL endpoint making use of dotNetRDF.
+	 */
 	public class SPARQLQueryDispatcher
 	{
 		protected SparqlRemoteEndpoint sparqlQueryEndpoint;
@@ -53,21 +56,37 @@ namespace ROOMZ
 			this.sparqlUpdateEndpoint = sparqlUpdateEndpoint;
 		}
 
+		/**
+		 * Run a query against the queryEndpoint and return the results
+		 * 
+		 * @param query, the query that will be run.
+		 */
 		public SparqlResultSet dispatchQuery (string query) 
 		{
 			Console.Write (query);
 			return sparqlQueryEndpoint.QueryWithResultSet (query);
 		}
 
+		/**
+		 * Run an update query against the queryEndpoint and return the results
+		 * 
+		 * @param query, the query that will be run.
+		 */
 		public SparqlResultSet dispatchUpdate (string query)
 		{
 			return sparqlUpdateEndpoint.QueryWithResultSet (query);
 		}
 
+		/**
+		 * Returns true of a queryEndpoint is present.
+		 */
 		public bool queryEndpointExists () {
 			return (sparqlQueryEndpoint != null);
 		}
 
+		/**
+		 * Returns true of a queryEndpoint is present.
+		 */
 		public bool updateEndpointExists () {
 			return (sparqlUpdateEndpoint != null);
 		}
