@@ -152,6 +152,7 @@ namespace ROOMZ
 		 */
 		public List<SparqlResult> getTriplesByCustomCriteria (QueryParameter subjectValue, QueryParameter predicateValue, QueryParameter objectValue, bool limit, int limitAmount) 
 		{
+
 			SparqlParameterizedString queryString = new SparqlParameterizedString();
 			queryString.CommandText = "SELECT @subjectSelect @predicateSelect @objectSelect WHERE { @subject @predicate @object } ";
 

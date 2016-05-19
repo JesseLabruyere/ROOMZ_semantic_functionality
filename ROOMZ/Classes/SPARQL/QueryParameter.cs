@@ -10,10 +10,15 @@ namespace ROOMZ
 		protected Object value;
 		protected Type valueType; 
 
+
+		public QueryParameter ()
+		{
+			setValue(new Empty());
+		}
+
 		public QueryParameter (Object value)
 		{
-			this.value = value;
-			this.valueType = value.GetType();
+			setValue(value);
 		}
 
 		public Object getValue () 
@@ -24,7 +29,7 @@ namespace ROOMZ
 		public void setValue (Object value) 
 		{
 			this.value = value;
-			this.valueType = value.GetType();
+			valueType = value.GetType();
 		}
 
 		/**

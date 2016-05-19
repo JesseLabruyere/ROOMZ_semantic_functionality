@@ -63,7 +63,7 @@ namespace ROOMZ
 		 */
 		public SparqlResultSet dispatchQuery (string query) 
 		{
-			Console.Write (query);
+			//Console.Write (query);
 			return sparqlQueryEndpoint.QueryWithResultSet (query);
 		}
 
