@@ -96,10 +96,6 @@ namespace ROOMZ
 		 */
 		public List<SparqlResult> getTriplesBySubjectAndObject(Uri uri,  bool limit, int limitAmount) 
 		{
-			//Add a namespace declaration
-			//queryString.Namespaces.AddNamespace("ex", new Uri("http://example.org/ns#"));
-			//queryString.CommandText = "SELECT ?subject ?predicate ?object WHERE { @uri ?predicate ?object . ?subject ?predicate @uri}";
-
 			SparqlParameterizedString queryString = new SparqlParameterizedString();
 			queryString.CommandText = "SELECT * { { SELECT (@uri AS ?subject) ?predicate ?object WHERE { @uri ?predicate ?object } } UNION { SELECT ?subject ?predicate (@uri AS ?object) WHERE { ?subject ?predicate @uri } } } ";
 			queryString.SetUri ("uri", uri);

@@ -37,7 +37,6 @@
     <Folder Include="Classes\SPARQL\Test\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Test.cs" />
     <Compile Include="Classes\Auth.cs" />
     <Compile Include="Classes\File.cs" />
     <Compile Include="Classes\Factories\AbstractFileFactory.cs" />
