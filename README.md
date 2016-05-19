@@ -1,5 +1,5 @@
 
-# Semantic functionality in C\#
+# Semantic functionality in C&#35;
 Example implementation that communicates with a remote SPARQL store using the dotNetRDF library.
 
 ## How it works
