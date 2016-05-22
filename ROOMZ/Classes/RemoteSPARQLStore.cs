@@ -11,7 +11,7 @@ namespace ROOMZ
 	 */
 	public class RemoteSPARQLStore
 	{
-		SPARQLQueryDispatcher queryDispatcher;
+		protected SPARQLQueryDispatcher queryDispatcher;
 
 		public RemoteSPARQLStore (SPARQLQueryDispatcher queryDispatcher)
 		{

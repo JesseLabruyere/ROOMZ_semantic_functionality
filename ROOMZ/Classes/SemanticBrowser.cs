@@ -12,7 +12,7 @@ namespace ROOMZ
 	public class SemanticBrowser
 	{
 
-		RemoteSPARQLStore store;
+		protected RemoteSPARQLStore store;
 
 		public SemanticBrowser (RemoteSPARQLStore store)
 		{
