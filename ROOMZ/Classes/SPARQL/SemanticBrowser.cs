@@ -158,7 +158,7 @@ namespace ROOMZ
 		public void browseInput(bool limit, int limitAmount) 
 		{
 			Console.WriteLine("Warning request Uri's without surrounding them with <>");
-			Console.Write("Give a value to browse to, : ");
+			Console.Write("Give a value to browse to : ");
 			string browseTo = Console.ReadLine();
 
 			if (browseTo.Length > 0) {
