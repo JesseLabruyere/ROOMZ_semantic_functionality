@@ -32,24 +32,14 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Classes\" />
-    <Folder Include="Classes\Factories\" />
-    <Folder Include="Classes\SPARQL\" />
-    <Folder Include="Classes\SPARQL\Test\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Auth.cs" />
-    <Compile Include="Classes\File.cs" />
-    <Compile Include="Classes\Factories\AbstractFileFactory.cs" />
-    <Compile Include="Classes\Factories\LocalFileFactory.cs" />
-    <Compile Include="Classes\LocalFile.cs" />
-    <Compile Include="Classes\SPARQL\SPARQLQueryDispatcher.cs" />
-    <Compile Include="Classes\SPARQL\RemoteSPARQLStore.cs" />
-    <Compile Include="Classes\SPARQL\QueryParameter.cs" />
-    <Compile Include="Classes\SPARQL\Empty.cs" />
-    <Compile Include="Classes\SPARQL\Test\SPARQLQueryDispatcherTest.cs" />
-    <Compile Include="Classes\SPARQL\Test\RemoteSPARQLStoreTest.cs" />
-    <Compile Include="Classes\SPARQL\SemanticBrowser.cs" />
-    <Compile Include="Classes\SPARQL\Test\SemanticBrowserTest.cs" />
+    <Compile Include="Classes\Empty.cs" />
+    <Compile Include="Classes\QueryParameter.cs" />
+    <Compile Include="Classes\RemoteSPARQLStore.cs" />
+    <Compile Include="Classes\SemanticBrowser.cs" />
+    <Compile Include="Classes\SPARQLQueryDispatcher.cs" />
+    <Compile Include="Classes\Init.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http" />
